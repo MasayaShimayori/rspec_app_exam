@@ -13,17 +13,16 @@ RSpec.describe 'Task', type: :system do
         expect(current_path).to eq project_tasks_path(project)
       end
 
-      it 'Project詳細からTask一覧ページにアクセスした場合、Taskが表示されること' do
+      fit 'Project詳細からTask一覧ページにアクセスした場合、Taskが表示されること' do
         # FIXME: テストが失敗するので修正してください
         visit project_path(project)
         click_link 'View Todos'
-        handle = page.driver.browser.window_handles
-        page.driver.browser.switch_to.window(handle.last)
+        switch_to_window(windows.last)
         expect(page).to have_content task.title
         expect(Task.count).to eq 1
         expect(current_path).to eq project_tasks_path(project)
         page.driver.browser.close
-        page.driver.browser.switch_to.window(handle.first)
+        switch_to_window(windows.first)
       end
     end
   end
