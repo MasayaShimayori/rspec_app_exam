@@ -21,8 +21,6 @@ RSpec.describe 'Task', type: :system do
         expect(page).to have_content task.title
         expect(Task.count).to eq 1
         expect(current_path).to eq project_tasks_path(project)
-        page.driver.browser.close
-        switch_to_window(windows.first)
       end
     end
   end
